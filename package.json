@@ -1,38 +1,56 @@
 {
   "name": "soubor",
   "version": "0.1.0",
+  "description": "This application lets you rename files",
   "private": true,
+  "devDependencies": {
+    "electron": "^13.0.1",
+    "electron-builder": "^22.10.5"
+  },
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1"
+    "electron-is-dev": "^2.0.0",
+    "electron-log": "^4.3.5",
+    "electron-updater": "^4.3.9"
   },
+  "main": "src/main.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "electron .",
+    "build": "electron-builder -mwl"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nikolaioak/soubor.git"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "keywords": [
+    "electron",
+    "file",
+    "soubor"
+  ],
+  "author": {
+    "name": "Nikolai Oakfield",
+    "email": "nikolai.oak@gmail.com"
+  },
+  "license": "TBD",
+  "build": {
+    "appId": "com.dubskybrew.soubor",
+    "copyright": "2021 Nikolai Oakfield",
+    "publish": {
+      "provider": "generic",
+      "url": "http://18.224.67.26/soubor"
+    },
+    "linux": {
+      "target": "AppImage",
+      "category": "Utility"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": "true",
+      "perMachine": "false",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "icon": "build/icon.png"
   }
 }
