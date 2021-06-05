@@ -4,7 +4,7 @@
   "description": "This application lets you rename files",
   "private": true,
   "devDependencies": {
-    "electron": "^13.0.1",
+    "electron": "^9.4.4",
     "electron-builder": "^22.10.5"
   },
   "dependencies": {
