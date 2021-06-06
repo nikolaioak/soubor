@@ -21,7 +21,19 @@ module.exports = () => {
 
         // listen for update found
         autoUpdater.on('update-available', () => {
-            autoUpdater.downloadUpdate()
+            // prompt user to update
+            dialog.showMessageBox({
+                type: 'info',
+                title: 'Update Available',
+                message: 'A new version of soubor is available. Would you like to install it?',
+                buttons: ['Sure','No Thanks']
+            }).then(result => {
+                let buttonIndex = result.response
+                // if update selected, start download
+                if (buttonIndex === 0) {
+                    autoUpdater.downloadUpdate()
+                }
+            })
         })
 
         // listen for download ready
@@ -29,9 +41,9 @@ module.exports = () => {
             // prompt user to update
             dialog.showMessageBox({
                 type: 'info',
-                title: 'Update Available',
-                message: 'A new version of soubor is available and will be installed.',
-                buttons: ['Update']
+                title: 'Update Downloaded',
+                message: 'New version of soubor downloaded. Quit and install now?',
+                buttons: ['Update','Later']
             }).then(result => {
                 let buttonIndex = result.response
                 // if update selected, start download
