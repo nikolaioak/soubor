@@ -1,5 +1,5 @@
 // Modules
-const {app, BrowserWindow, ipcMain} = require('electron');
+const {app, BrowserWindow, ipcMain, globalShortcut} = require('electron');
 const path = require('path');
 const isDev = require('electron-is-dev');
 const os = require('os');
@@ -23,6 +23,10 @@ function initialize() {
     updater()
 
     function createWindow() {
+
+        globalShortcut.register('CommandOrControl+R', function() {
+            mainWindow.reload()
+        })
 
         const windowOptions = {
             minWidth: 900, minHeight: 600,

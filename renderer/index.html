@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'">
-    <meta name="theme-color" content="#000000" />
-    <meta name="description" content="An electron application to rename your files"
-    />
+    <link rel="stylesheet" type="text/css" href="resources/external/normalize.css">
+    <link rel="stylesheet" type="text/css" href="resources/external/grid.css">
+    <link rel="stylesheet" type="text/css" href="resources/style.css">
     <title>soubor</title>
+    <meta name="theme-color" content="#ffffff" />
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="message">...</div>
+    <header class="container">
+      <label id="switch" class="switch right">
+        <input type="checkbox" id="slider">
+        <span class="slider round"></span>
+      </label>
+      <h2 id="message">...</h2>
+      <div id="myModal" class="modal">
+        <div class="modal-content" id="modal-content">
+            <div class="close">&times;</div>
+            <p>Sample Text</p>
+          </div>
+      </div>
+    </header>
+    <footer>
+
+    </footer>
+    <script src="./index.js"></script>
   </body>
-  <footer>
-    <div>v<span id="version"></span></div>
-  </footer>
-  <script src="./index.js"></script>
 </html>
