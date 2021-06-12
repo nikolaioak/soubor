@@ -4,7 +4,8 @@ const path = require('path');
 const isDev = require('electron-is-dev');
 const os = require('os');
 const updater = require('./main/updater');
-const glob = require('glob')
+const glob = require('glob');
+const fs = require('fs');
 
 if (process.mas) app.setName('soubor')
 
@@ -41,8 +42,8 @@ function initialize() {
             }
         }
 
-        if (process.platform === 'linux') {
-            windowOptions.icon = path.join(__dirname, '/assets/app.png')
+        if (process.platform !== 'darwin') {
+            windowOptions.icon = path.join(__dirname, 'main/assets/app.png')
         }
 
         // Create the browser window.
@@ -111,9 +112,15 @@ function loadMains () {
 }
 
 ipcMain.on('toMain', (event, args) => {
-    if (args === 'vRequest') {
-        mainWindow.webContents.send('fromMain', `vResponse|${app.getVersion()}`);
-    } else if (args === 'userRequest') {
+    if (args === 'userRequest') {
         mainWindow.webContents.send('fromMain', `userResponse|${os.userInfo().username}`);
+    } else if (args.split('|')[0] === 'loadFiles') {
+        // browse provided folder path and load file details as an array
+        // format [ fileName, dateModified, fileSize ]
+        let folderPath = args.split('|')[1]
+        
+    } else if (args === 'folderBrowse') {
+        // open default file browser to select a folder
+
     }
 });
