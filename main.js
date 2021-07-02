@@ -1,5 +1,5 @@
 // Modules
-const {app, BrowserWindow, ipcMain, globalShortcut} = require('electron');
+const {app, BrowserWindow, ipcMain, globalShortcut, dialog} = require('electron');
 const path = require('path');
 const isDev = require('electron-is-dev');
 const os = require('os');
@@ -30,7 +30,7 @@ function initialize() {
         })
 
         const windowOptions = {
-            minWidth: 900, minHeight: 600,
+            minWidth: 1000, minHeight: 600,
             show: false, frame: true,
             title: app.getName(),
             webPreferences: {
@@ -111,16 +111,60 @@ function loadMains () {
     files.forEach((file) => { require(file) })
 }
 
-ipcMain.on('toMain', (event, args) => {
+ipcMain.on('toMain', async (event, args) => {
+    let arg0 = args.split('|')[0]
+    let arg1 = args.split('|')[1]
     if (args === 'userRequest') {
         mainWindow.webContents.send('fromMain', `userResponse|${os.userInfo().username}`);
-    } else if (args.split('|')[0] === 'loadFiles') {
-        // browse provided folder path and load file details as an array
-        // format [ fileName, dateModified, fileSize ]
-        let folderPath = args.split('|')[1]
-        
+    } else if (arg0 === 'loadFiles') {
+        // browse provided folder path and load file details as an array of objects
+        let folderPath = arg1
+        try {
+            // get files as array
+            const files = await fs.promises.readdir(folderPath);
+            let fileDetails = []
+            // loop through the files
+            for ( const file of files ) {
+                // get full file path
+                let filePath = path.join(folderPath, file);
+                // stat the file
+                const stat = await fs.promises.stat(filePath);
+                if (stat.isFile()) {
+                    let month, day, year, modifiedDate, fileSize
+                    month = stat.mtime.toLocaleDateString('default', { month: 'short'})
+                    day = stat.mtime.getDate()
+                    year = stat.mtime.getFullYear()
+                    modifiedDate = `${day}-${month}-${year}`
+                    fileSize = convertBytes(stat.size)
+                    fileDetails.push(`${file}:${modifiedDate}:${fileSize}`)
+                }
+            }
+            mainWindow.webContents.send('fromMain',`fileDetails|${fileDetails}`);
+        } catch (err) {
+            console.error(`Oops! ${err}`)
+            mainWindow.webContents.send('fromMain',`error|${err}`);
+        }
     } else if (args === 'folderBrowse') {
         // open default file browser to select a folder
-
+        const result = await dialog.showOpenDialog(mainWindow, {
+            properties: ['openDirectory']
+        })
+        mainWindow.webContents.send('fromMain',`folderPath|${result.filePaths}`)
     }
 });
+
+const convertBytes = bytes => {
+    const sizes = ["Bytes", "KB", "MB", "GB", "TB"]
+
+    if (bytes == 0) {
+        return 'N/A'
+    }
+
+    const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)))
+
+    if (i == 0) {
+        return bytes + " " + sizes[i]
+    }
+
+    return (bytes / Math.pow(1024, i)).toFixed(1) + " " + sizes[i]
+}

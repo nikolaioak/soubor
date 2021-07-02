@@ -39,19 +39,19 @@
                     <th class="thDetails">File Size</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="fileTable">
                   <tr>
-                    <td class="tdName">Loading...</td>
+                    <td class="tdName">Select...</td>
                     <td class="tdDetails">...</td>
                     <td class="tdDetails">...</td>
                   </tr>
                   <tr>
-                    <td class="tdName">Your...</td>
+                    <td class="tdName">A...</td>
                     <td class="tdDetails">...</td>
                     <td class="tdDetails">...</td>
                   </tr>
                   <tr>
-                    <td class="tdName">Files...</td>
+                    <td class="tdName">Folder...</td>
                     <td class="tdDetails">...</td>
                     <td class="tdDetails">...</td>
                   </tr>
@@ -61,7 +61,28 @@
         </div>
         <div class="col span-1-of-2 actionPlan">
           <h3>Action Plan</h3>
-
+          <div class="row center">
+            <div class="col span-1-of-4">
+              <select id="actionSelect" class="field">
+                <option value="actionSelect" selected disabled>Select An Action</option>
+                <option value="clearFileName">Clear</option>
+                <option value="replaceText">Replace</option>
+                <option value="addText">Add Text</option>
+                <option value="addNum">Add Number</option>
+                <option value="trimText">Trim</option>
+                <option value="changeCase">Change Case</option>
+                <option value="customAction">Custom</option>
+              </select>
+            </div>
+            <div id="actionHolder">
+              <!-- Placeholder for action UI-->
+            </div>
+          </div>
+          <div class="row center">
+            <div class="col span-2-of-6"></div>
+            <div class="col span-2-of-6"><a id="commitAction" class="btn btn-full" href="#">Commit Action</a></div>
+            <div class="col span-2-of-6"></div>
+          </div>
         </div>
       </div>
     </header>
