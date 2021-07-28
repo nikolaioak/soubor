@@ -7,59 +7,113 @@
     <link rel="stylesheet" type="text/css" href="resources/external/normalize.css">
     <link rel="stylesheet" type="text/css" href="resources/external/grid.css">
     <link rel="stylesheet" type="text/css" href="resources/style.css">
+    <link rel="stylesheet" type="text/css" href="resources/tw-style.css">
     <title>soubor</title>
     <meta name="theme-color" content="#ffffff" />
   </head>
-  <body>
+  <body class="flex">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <header class="container">
-      <label id="switch" class="switch right">
-        <input type="checkbox" id="slider">
-        <span class="slider round"></span>
-      </label>
-      <h2 id="message">...</h2>
+      <div class="flex items-center justify-center w-full mb-12">
+        <h2 id="message">...</h2>
+        <label id="switch" for="slider" class="flex items-center cursor-pointer">
+          <div class="relative">
+            <input type="checkbox" id="slider" class="sr-only">
+            <div class="block bg-gray-600 w-10 h-6 rounded-full"></div>
+            <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition"></div>
+          </div>
+        </label>
+      </div>
       <div id="myModal" class="modal">
         <div class="modal-content" id="modal-content">
             <div class="close">&times;</div>
             <p>Sample Text</p>
-          </div>
-      </div>
+        </div>
+    </div>
       <div class="section row box">
-        <div class="col span-1-of-2 browse">
+        <div class="row browse">
           <h3>Browse</h3>
             <div class="row center">
               <input id="folderField" class="field" type="text" placeholder="/home/" readonly><a id="changeFolder" class="btn btn-full" href="#">Change Folder</a>
             </div>
-            <div class="row">
-              <table>
-                <thead>
-                  <tr>
-                    <th class="thName">Name</th>
-                    <th class="thDetails">Date Modified</th>
-                    <th class="thDetails">File Size</th>
-                  </tr>
-                </thead>
-                <tbody id="fileTable">
-                  <tr>
-                    <td class="tdName">Select...</td>
-                    <td class="tdDetails">...</td>
-                    <td class="tdDetails">...</td>
-                  </tr>
-                  <tr>
-                    <td class="tdName">A...</td>
-                    <td class="tdDetails">...</td>
-                    <td class="tdDetails">...</td>
-                  </tr>
-                  <tr>
-                    <td class="tdName">Folder...</td>
-                    <td class="tdDetails">...</td>
-                    <td class="tdDetails">...</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="row flex flex-col">
+                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                  <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                      <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                          <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                              Name
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                              Date Modified
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                              File Size
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody id="fileTable" class="bg-white divide-y divide-gray-200">
+                          <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                              <div class="text-sm font-medium text-gray-900">
+                                Select...
+                              </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                              <div class="text-sm text-gray-500">
+                              ...
+                              </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                              <div class="text-sm text-gray-500">
+                              ...
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                              <div class="text-sm font-medium text-gray-900">
+                                A...
+                              </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                              <div class="text-sm text-gray-500">
+                              ...
+                              </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                              <div class="text-sm text-gray-500">
+                              ...
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                              <div class="text-sm font-medium text-gray-900">
+                                Folder...
+                              </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                              <div class="text-sm text-gray-500">
+                              ...
+                              </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                              <div class="text-sm text-gray-500">
+                              ...
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
             </div>
         </div>
-        <div class="col span-1-of-2 actionPlan">
+        <div class="row actionPlan">
           <h3>Action Plan</h3>
           <div class="row center">
             <div class="col span-1-of-4">

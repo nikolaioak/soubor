@@ -8,6 +8,7 @@ let message = document.getElementById('message'),
  modal = document.getElementById('myModal'),
  modalContent = document.getElementById('modal-content'),
  span = document.getElementsByClassName('close')[0],
+ body = document.querySelector('body'),
  fileTable = document.getElementById('fileTable'),
  selectAction = document.getElementById('actionSelect'),
  actionHolder = document.getElementById('actionHolder')
@@ -18,7 +19,6 @@ window.onload = () => {
     // send a request for the username
     window.api.send('toMain','userRequest')
 }
-
 
 // Listen for messages
 window.api.receive('fromMain', (data) => {
@@ -35,6 +35,8 @@ window.api.receive('fromMain', (data) => {
             folderField.value = this.lastPath
             loadFiles(this.lastPath)
         } else {
+            // need to change this to environment variable, main process should send it
+            // something like the home directory or define it per OS
             folderField.value = `/home/${responseData}`
         }
     } else if (responseType === 'folderPath') {
@@ -86,7 +88,8 @@ function generateFileTable(fileDetails) {
         let fileModified = fileDetails[i].split(':')[1]
         let fileSize = fileDetails[i].split(':')[2]
         //build a row per file
-        fileRows += `<tr><td class="tdName">${fileName}</td><td class="tdDetails">${fileModified}</td><td class="tdDetails">${fileSize}</td></tr>`
+        fileRows += `<tr><td class="px-6 py-4 whitespace-nowrap"><div class="text-sm font-medium text-gray-900">${fileName}</div></td><td class="px-6 py-4 whitespace-nowrap"><div class="text-sm text-gray-500">${fileModified}</div></td><td class="px-6 py-4 whitespace-nowrap"><div class="text-sm text-gray-500">${fileSize}</div></td></tr>`
+        //fileRows += `<tr><td class="tdName">${fileName}</td><td class="tdDetails">${fileModified}</td><td class="tdDetails">${fileSize}</td></tr>`
     }
     fileTable.innerHTML = ''
     fileTable.innerHTML = fileRows
@@ -101,8 +104,10 @@ changeFolder.addEventListener('click', e => {
 themeSwitch.addEventListener('change', e => {
    if (localStorage.getItem('theme') === 'theme-dark'){
        setTheme('theme-light');
+       modalAlert('Light!')
    } else {
        setTheme('theme-dark');
+       modalAlert('Dark!')
    }
 });
 

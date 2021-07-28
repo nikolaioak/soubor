@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   margin: 0;
   padding: 0;
@@ -74,7 +78,7 @@ code {
 .container {
   display: block;
   width: 100%;
-  height: 300%;
+  height: 100%;
   background: var(--color-secondary);
   color: var(--font-color);
   justify-content: top;
@@ -104,77 +108,9 @@ section {
     clear: both;
 }
 
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 17px;
-  margin-top: 1%;
-  margin-right: 1%;
-}
-
-/* Hide default HTML checkbox */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* The slider */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 24px;
-  width: 24px;
-  left: 0px;
-  bottom: 4px;
-  top: 0;
-  bottom: 0;
-  margin: auto 0;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  box-shadow: 0 0px 15px #2020203d;
-  background: white url('img/dark.png');
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-input:checked + .slider {
-  background-color: #2196f3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(38px);
-  -ms-transform: translateX(38px);
-  transform: translateX(38px);
-  background: white url('img/light.png');
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 16px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
+input:checked ~ .dot {
+  transform: translateX(100%);
+  background-color: var(--color-accent);
 }
 
 .row {
@@ -201,7 +137,7 @@ input:checked + .slider:before {
 /* -------------------------------------------------- */
 /* FILE TABLE */
 /* -------------------------------------------------- */ 
-table, th, td {
+/* table, th, td {
   border: 1px solid var(--color-primary);
   border-collapse: collapse;
   font-size: 80%;
@@ -209,20 +145,16 @@ table, th, td {
 
 th, td {
   padding: 5px;
-}
-
-tr:nth-child(even) {
-  background-color: var(--color-primary);
-}
+} */
 
 tr:nth-child(odd) {
   background-color: var(--color-secondary);
 }
 
-table {
+/* table {
   width: 100%;
   border-radius: 5px;
-}
+} */
 
 th {
   color: var(--font-color);
@@ -235,14 +167,14 @@ td {
   background-color: var(--color-secondary);
 }
 
-.thName, .tdName {
+/* .thName, .tdName {
   width: 50%;
 }
 
 .thDetails, .tdDetails {
   width: 25%;
   text-align: center;
-}
+} */
 
 /* -------------------------------------------------- */
 /* BUTTONS */
@@ -339,30 +271,31 @@ background: rgba(51,51,51,0.4);
 
 /* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: none;
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
 }
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  background-color: var(--field-color);
+  margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 80%;
   height: 20%;
 }
 
 .modal-content p {
   float: left;
+  color: var(--font-color);
 }
 
 /* The Close Button */  
@@ -370,7 +303,7 @@ background: rgba(51,51,51,0.4);
   font-size: 200%;
   background: none;
   border: none;
-  color: #f36633;
+  color: var(--color-accent);
   cursor: pointer;
   vertical-align: middle;
   float: right;
@@ -379,7 +312,7 @@ background: rgba(51,51,51,0.4);
 
 .close:hover,
 .close:focus {
-  color: black;
+  color: var(--color-primary);
   text-decoration: none;
   cursor: pointer;
 }
