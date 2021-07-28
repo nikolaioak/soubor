@@ -19,7 +19,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build-css": "postcss renderer/resources/style.css -o renderer/resources/tw-style.css",
+    "build-css": "postcss renderer/style.css -o renderer/tw-style.css",
     "build-w": "electron-builder -w",
     "build-l": "electron-builder -l",
     "build-m": "electron-builder -m",
